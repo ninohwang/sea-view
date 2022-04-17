@@ -1,0 +1,176 @@
+:root {
+    box-sizing: border-box;
+    user-select: none;
+    --dur-time: 5s;
+    --col-emo-white: #F2F6F9;
+    --col-emo-sun-r: #f65857;
+    --col-emo-sun-y: #ec9735;
+}
+
+* {
+    box-sizing: inherit;
+    xoutline: cyan 1px solid;
+}
+
+body {
+    display: grid;
+    place-content: center;
+    height: 100vh;
+    background-color: var(--col-emo-white);
+}
+
+.round-full {
+    border-radius: 100%;
+}
+
+.view-wrpper {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    display: grid;
+    place-content: center;
+    border-radius: 50px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.sea-like-wrp {
+    width: 500px;
+    height: 500px;
+    border-radius: 100%;
+
+    &:hover {
+        transform: scale(1.7);
+        border-radius: 50px;
+        & ~ .sea-half-mask {
+            background-color: transparent;
+        }
+        & ~ .sun-like {
+            --col-emo-sunpar: var(--col-emo-sun-y);
+            --col-emo-sun: var(--col-emo-sun-r);
+            transform: translateY(-100%);
+        }
+    }
+}
+
+.sea-like {
+    --col-emo-sky: #4d5ba544;
+    --col-emo-sea: #49bcaf;
+    --col-emo-mid: #e16d7a55; 
+    height: 100%;
+    background-image: linear-gradient(
+            var(--col-emo-sky) 20%,
+            var(--col-emo-mid) 45%,
+            var(--col-emo-mid) 55%,
+            var(--col-emo-sea) 100%
+    );
+
+    // 一种样式
+    &:xhover {
+        --col-emo-sky: #f1e4dc;
+        --col-emo-sea: #f9b2c4;
+        border-radius: 50px;
+    }
+
+    &:hover {
+        border-radius: 50px;
+        --col-emo-mid: var(--col-emo-white);
+        // ❤ https://movie.douban.com/photos/photo/820548775/
+        --col-emo-sea: #dbe9f3;
+        --col-emo-sky: #4991cd;
+
+        // or try this:
+        // --col-emo-sky: #dbe9f3;
+        // --col-emo-sea: #4991cd;
+    }
+
+
+}
+
+.sea-half-mask {
+    width: 500px;
+    height: 250px;
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+    left: 0;
+    margin: auto;
+    z-index: 999;
+    border-radius: 0 0 999px 999px;
+    filter: blur(20px);
+    background-color: #FFF6;
+
+    &:hover {
+        background-color: #f6585722;
+        & ~ .sun-like {
+            transform: translateY(25%);
+            --col-emo-sun: #fff2be;
+        }
+    }
+}
+
+.sun-like {
+    --col-emo-sunpar: var(--col-emo-sun-r);
+    --col-emo-sun: var(--col-emo-sun-y);
+    z-index: 99;
+    position: absolute;
+    top: 0; right: 0;bottom: 0;left: 0;
+    margin: auto;
+    width: 150px; height: 150px;
+    background-image: linear-gradient(var(--col-emo-sunpar) 50%, var(--col-emo-sun) 100%);
+    transform: scale(.8) translateY(-10%);
+}
+
+// #no
+.sea-like-wrp {
+    transition: all var(--dur-time) ease-out;
+}
+
+// #no
+.sea-half-mask {
+    transition: all var(--dur-time) ease-out;
+}
+
+// #no
+.sea-like {
+    animation: anima-sea 22s linear infinite reverse paused;
+    transition: --col-emo-sky var(--dur-time) ease-out,
+                --col-emo-sea var(--dur-time) ease-out,
+                --col-emo-mid var(--dur-time) ease-out,
+                border-radius var(--dur-time) ease-out;
+}
+
+// #no
+.sun-like {
+    animation: anima-sun var(--dur-time) linear infinite;
+    transition: --col-emo-sunpar var(--dur-time) ease-out,
+                --col-emo-sun var(--dur-time) ease-out,
+                transform var(--dur-time) ease-out;
+}
+
+@keyframes anima-sea {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes anima-sun {
+    from {
+        opacity: 1;
+        filter: blur(2px);
+    }
+
+    50% {
+        opacity: .4;
+        filter: blur(0);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(2px);
+    }
+}

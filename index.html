@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sea-sun</title>
+    <link rel="stylesheet/less" type="text/css" href="./index.less">
+    <script src="./less.js"></script> <!-- https://lesscss.org/usage/ -->
+    <script>
+        window.onload = () => {
+
+            // ref: https://www.zhangxinxu.com/wordpress/2018/03/background-gradient-transtion/
+            const seaLikeDom = document.getElementsByClassName("sea-like")[0]
+            const sunLikeDom = document.querySelectorAll(".sun-like")[0]
+            const seaWrpDom = document.querySelector(".sea-like-wrp")
+            sunLikeDom.addEventListener("mouseenter", e => {
+                seaLikeDom.style.animationPlayState = "running"
+            })
+            sunLikeDom.addEventListener("mouseleave", e => {
+                seaLikeDom.style.animationPlayState = "paused"
+            })
+
+            ;((colVarArr) => {
+                const globalCtx = globalThis || window
+                if (!globalCtx.CSS || !globalCtx.CSS.registerProperty) return
+                const regProp = cssVarName => void globalThis.CSS.registerProperty({
+                    name: cssVarName,
+                    syntax: '<color>',
+                    inherits: false,
+                    initialValue: 'transparent'
+                })
+                colVarArr.forEach(regProp)
+            })([
+                "--col-emo-sky",
+                "--col-emo-sea",
+                "--col-emo-mid",
+                "--col-emo-sun",
+                "--col-emo-sunpar",
+            ])
+
+        }
+    </script>
+    
+</head>
+
+<body>
+    <div class="view-wrpper">
+        <div class="sea-like-wrp round-full">
+            <div class="sea-like round-full"></div>
+        </div>
+        <div class="sea-half-mask"></div>
+        <div class="sun-like round-full"></div>
+    </div>
+</body>
+</html>
