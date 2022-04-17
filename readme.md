@@ -1,5 +1,7 @@
 ## 相关记录
 
+### 预览
+http://ninoh.cc/sea
 ### `transform` 和 `animation` 的效果共存问题
 这个小网页，一开始是 `sea-like` `sea-half-mask` `sun-like` 三个元素是并列同一层级的。但是之后发现 `sea-like` 上面想同时实现 360 度旋转的动画、和 `:hover` 会自动放大（利用 `transfrom` ）,但是发现两个效果不能放在同一个元素上。
 
