@@ -6,15 +6,23 @@
     --col-emo-sun-r: #f65857;
     --col-emo-sun-y: #ec9735;
 
-    --col-emo-rainbow-alice: #3cbdf5;
-    --col-emo-rainbow-bob: #36ebd8;
-    --col-emo-rainbow-charley:#fbfed5;
-    --col-emo-rainbow-david: #c594bc;
+    // ref: https://www.zhihu.com/question/39674496/answer/1394267301
+    --col-emo-rainbow-violett:   #c7bbd588;
+    --col-emo-rainbow-indigo:    #37d5fe88;
+    --col-emo-rainbow-turkisblau:#8ecffe88;
+    --col-emo-rainbow-grun:      #c6fe9c88;
+    --col-emo-rainbow-gelb:      #fdff7a88;
+    --col-emo-rainbow-orange:    #fedc6688;
+    --col-emo-rainbow-rot:       #fd7a5b88;
 }
 
 * {
     box-sizing: inherit;
     xoutline: cyan 1px solid;
+}
+
+body, html {
+    cursor: url('./mouse.custom.cur'), auto !important;
 }
 
 body {
@@ -30,13 +38,13 @@ body {
 
 .view-wrpper {
     position: relative;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     display: grid;
     place-content: center;
-    border-radius: 50px;
+    border-radius: 100%;
     overflow: hidden;
-    cursor: pointer;
+    // cursor: pointer;
 }
 
 .sea-like-wrp {
@@ -97,7 +105,7 @@ body {
     height: 250px;
     position: absolute;
     right: 0;
-    bottom: 50px;
+    bottom: 0;
     left: 0;
     margin: auto;
     z-index: 999;
@@ -126,24 +134,52 @@ body {
     transform: scale(.8) translateY(-10%);
 }
 
+.overload.sun-like {
+    opacity: 0;
+    border: 1px dotted #333;
+    background-color: transparent;
+    background: unset;
+    font-size: 28px;
+    text-align: center;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
 .rainbow-like {
     position: absolute;
     background-image: radial-gradient(
-        circle closest-side,
+        ellipse closest-side,
         transparent 60%, 
-        var(--col-emo-rainbow-alice) 65%, 
-        var(--col-emo-rainbow-bob) 70%,
-        var(--col-emo-rainbow-charley) 75%,
-        var(--col-emo-rainbow-david) 80%,
-        transparent 90%,
+        var(--col-emo-rainbow-violett) 65%, 
+        var(--col-emo-rainbow-indigo) 68%,
+        var(--col-emo-rainbow-turkisblau) 71%,
+        var(--col-emo-rainbow-grun) 74%,
+        var(--col-emo-rainbow-gelb) 77%,
+        var(--col-emo-rainbow-orange) 80%,
+        var(--col-emo-rainbow-rot) 83%,
+        transparent 85%,
     );
     z-index: 9;
-    width: 90%;
-    height: 90%;
-    top: 45%;
-    left: 0%;
-    right: 0;
-    margin: auto;
+    width: 150%;
+    height: 160%;
+    top: 15%;
+    left: -36.4%;
+
+    opacity: 0;
+}
+
+.view-wrpper {
+    &:hover {
+        .rainbow-like {
+            opacity: 1;
+        }
+    }
 }
 
 // #no
@@ -167,19 +203,25 @@ body {
 
 // #no
 .sun-like {
-    animation: anima-sun var(--dur-time) linear infinite;
+    xanimation: anima-sun var(--dur-time) linear infinite;
     transition: --col-emo-sunpar var(--dur-time) ease-out,
                 --col-emo-sun var(--dur-time) ease-out,
-                transform var(--dur-time) ease-out;
+                transform var(--dur-time) ease-out,
+                opacity var(--dur-time) ease-out;
+}
+
+// #no
+.rainbow-like {
+    transition: opacity var(--dur-time) ease-out;
 }
 
 @keyframes anima-sea {
     from {
-        transform: rotate(0);
+        transform: rotate(180deg);
     }
 
     to {
-        transform: rotate(360deg);
+        transform: rotate(calc( 360deg + 180deg ));
     }
 }
 
