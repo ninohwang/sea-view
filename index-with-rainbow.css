@@ -17,6 +17,10 @@
   box-sizing: inherit;
   xoutline: cyan 1px solid;
 }
+body,
+html {
+  cursor: url('mouse.custom.cur'), auto !important;
+}
 body {
   display: grid;
   place-content: center;
@@ -34,7 +38,6 @@ body {
   place-content: center;
   border-radius: 100%;
   overflow: hidden;
-  cursor: pointer;
 }
 .sea-like-wrp {
   width: 500px;
@@ -107,9 +110,19 @@ body {
   transform: scale(0.8) translateY(-10%);
 }
 .overload.sun-like {
+  opacity: 0;
   border: 1px dotted #333;
   background-color: transparent;
   background: unset;
+  font-size: 28px;
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+.overload.sun-like:hover {
+  opacity: 1;
 }
 .rainbow-like {
   position: absolute;
@@ -119,6 +132,10 @@ body {
   height: 160%;
   top: 15%;
   left: -36.4%;
+  opacity: 0;
+}
+.view-wrpper:hover .rainbow-like {
+  opacity: 1;
 }
 .sea-like-wrp {
   transition: all var(--dur-time) ease-out;
@@ -131,15 +148,18 @@ body {
   transition: --col-emo-sky var(--dur-time) ease-out, --col-emo-sea var(--dur-time) ease-out, --col-emo-mid var(--dur-time) ease-out, border-radius var(--dur-time) ease-out;
 }
 .sun-like {
-  animation: anima-sun var(--dur-time) linear infinite;
-  transition: --col-emo-sunpar var(--dur-time) ease-out, --col-emo-sun var(--dur-time) ease-out, transform var(--dur-time) ease-out;
+  xanimation: anima-sun var(--dur-time) linear infinite;
+  transition: --col-emo-sunpar var(--dur-time) ease-out, --col-emo-sun var(--dur-time) ease-out, transform var(--dur-time) ease-out, opacity var(--dur-time) ease-out;
+}
+.rainbow-like {
+  transition: opacity var(--dur-time) ease-out;
 }
 @keyframes anima-sea {
   from {
-    transform: rotate(0);
+    transform: rotate(180deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(calc(360deg + 180deg));
   }
 }
 @keyframes anima-sun {
@@ -156,3 +176,4 @@ body {
     filter: blur(2px);
   }
 }
+/*# sourceMappingURL=./index-with-rainbow.css.map */
